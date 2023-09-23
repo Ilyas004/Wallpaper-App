@@ -30,7 +30,9 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.mobilewallpaper.R
 import com.example.mobilewallpaper.ui.detail_wallpaper.component.WallpaperInstallMenu
+import com.example.mobilewallpaper.ui.setting.THEME
 import com.example.mobilewallpaper.ui.theme.MobileWallpaperTheme
+import com.example.mobilewallpaper.util.SettingState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -45,18 +47,18 @@ fun DetailWallpaperScreen(
 
     isFavorites.value = viewModel.checkFavorites(idString = viewModel.wallpaper.idString)
 
-    MobileWallpaperTheme {
+    MobileWallpaperTheme(darkTheme = SettingState.settingState.theme) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
         ) {
             AsyncImage(model = viewModel.wallpaper.url,
                 contentDescription = "wallpaper",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize(),
-
-                )
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            )
             Row(
                 modifier = Modifier.align(Alignment.BottomCenter),
                 horizontalArrangement = Arrangement.spacedBy(30.dp),
