@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.mobilewallpaper.R
 import com.example.mobilewallpaper.ui.detail_wallpaper.component.WallpaperInstallMenu
+import com.example.mobilewallpaper.ui.theme.MobileWallpaperTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -44,63 +45,65 @@ fun DetailWallpaperScreen(
 
     isFavorites.value = viewModel.checkFavorites(idString = viewModel.wallpaper.idString)
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        AsyncImage(model = viewModel.wallpaper.url,
-            contentDescription = "wallpaper",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize(),
-
-        )
-        Row(
-            modifier = Modifier.align(Alignment.BottomCenter),
-            horizontalArrangement = Arrangement.spacedBy(30.dp),
-            verticalAlignment = Alignment.CenterVertically
+    MobileWallpaperTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
         ) {
-            Button(
-                onClick = {
-                          isSheetOpen.value = true
-                    //viewModel.installingWallpaper(imageUrl = viewModel.wallpaper.url)
-                },
-                shape = RoundedCornerShape(10.dp),
-                modifier = Modifier
-                    .padding(bottom = 20.dp)
-                    .background(Color.Transparent)
-            ) {
-                Text(text = "Установить", fontSize = 16.sp)
-            }
-            Image(
-                painter = painterResource(
-                    if (isFavorites.value) {
-                        R.drawable.favorite
-                    } else {
-                        R.drawable.favorite_border
-                    }
-                ),
-                contentDescription = "Добавить в избранное",
-                modifier = Modifier
-                    .size(60.dp)
-                    .padding(bottom = 20.dp)
-                    .clickable {
-                        isFavorites.value = if (isFavorites.value) {
-                            viewModel.deleteWallpaper()
-                        } else {
-                            viewModel.saveWallpaper()
+            AsyncImage(model = viewModel.wallpaper.url,
+                contentDescription = "wallpaper",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
 
+                )
+            Row(
+                modifier = Modifier.align(Alignment.BottomCenter),
+                horizontalArrangement = Arrangement.spacedBy(30.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(
+                    onClick = {
+                        isSheetOpen.value = true
+                        //viewModel.installingWallpaper(imageUrl = viewModel.wallpaper.url)
+                    },
+                    shape = RoundedCornerShape(10.dp),
+                    modifier = Modifier
+                        .padding(bottom = 20.dp)
+                        .background(Color.Transparent)
+                ) {
+                    Text(text = "Установить", fontSize = 16.sp)
+                }
+                Image(
+                    painter = painterResource(
+                        if (isFavorites.value) {
+                            R.drawable.favorite
+                        } else {
+                            R.drawable.favorite_border
                         }
-                    }
-            )
-        }
-        if (isSheetOpen.value) {
-            WallpaperInstallMenu(
-                onInstallToLockScreenClick = { viewModel.installingWallpaperLockDisplay(viewModel.wallpaper.url) },
-                onInstallToSystemClick = { viewModel.installingWallpaperSystemDisplay(viewModel.wallpaper.url) },
-                onInstallToBothClick = { viewModel.installingWallpaperAllDisplay(imageUrl = viewModel.wallpaper.url) },
-                onDismiss = { isSheetOpen.value = false }
-            )
+                    ),
+                    contentDescription = "Добавить в избранное",
+                    modifier = Modifier
+                        .size(60.dp)
+                        .padding(bottom = 20.dp)
+                        .clickable {
+                            isFavorites.value = if (isFavorites.value) {
+                                viewModel.deleteWallpaper()
+                            } else {
+                                viewModel.saveWallpaper()
+
+                            }
+                        }
+                )
+            }
+            if (isSheetOpen.value) {
+                WallpaperInstallMenu(
+                    onInstallToLockScreenClick = { viewModel.installingWallpaperLockDisplay(viewModel.wallpaper.url) },
+                    onInstallToSystemClick = { viewModel.installingWallpaperSystemDisplay(viewModel.wallpaper.url) },
+                    onInstallToBothClick = { viewModel.installingWallpaperAllDisplay(imageUrl = viewModel.wallpaper.url) },
+                    onDismiss = { isSheetOpen.value = false }
+                )
+            }
         }
     }
 }
