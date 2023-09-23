@@ -8,7 +8,7 @@ import java.net.URL
 
 class BitmapConverter {
     companion object {
-        suspend fun bitmapConverter(imageUrl: String) : Bitmap {
+        suspend fun bitmapConverting(imageUrl: String) : Bitmap {
             val url = URL(imageUrl)
             val image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
             return image

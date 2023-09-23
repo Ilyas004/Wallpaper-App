@@ -2,9 +2,9 @@ package com.example.mobilewallpaper.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.mobilewallpaper.model.Wallpaper
+import com.example.mobilewallpaper.model.WallpaperDB
 
-@Database(entities = [Wallpaper::class], version = 1, exportSchema = true)
+@Database(entities = [WallpaperDB::class], version = 1, exportSchema = true)
 abstract class WallpaperDatabase : RoomDatabase() {
     abstract fun getWallpaperDao() : WallpaperDao
 }

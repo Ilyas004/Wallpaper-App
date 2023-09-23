@@ -5,18 +5,18 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.mobilewallpaper.model.Wallpaper
+import com.example.mobilewallpaper.model.WallpaperDB
 
 
 @Dao
 interface WallpaperDao {
 
     @Query("SELECT * FROM wallpaper")
-    suspend fun getWallpaper(): List<Wallpaper>
+    suspend fun getWallpaper(): List<WallpaperDB>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun setWallpaper(wallpaper: Wallpaper)
+    suspend fun setWallpaper(wallpaper: WallpaperDB)
 
-    @Delete
-    suspend fun deleteWallpaper(wallpaper: Wallpaper)
+    @Query("DELETE FROM wallpaper WHERE idString = :idString")
+    suspend fun deleteWallpaper(idString: String)
 }

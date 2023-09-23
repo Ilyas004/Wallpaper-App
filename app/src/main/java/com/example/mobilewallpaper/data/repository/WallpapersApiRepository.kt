@@ -11,6 +11,6 @@ class WallpapersApiRepository(
 
     suspend fun getWallpapersByName(name: String): List<Wallpaper> {
         val listWallpaper = api.getWallpapersByName(name = name)
-        return listWallpaper.results.map { it.toWallpaper(it) }
+        return listWallpaper.results.map { it.toWallpaper() }
     }
 }

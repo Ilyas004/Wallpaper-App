@@ -1,3 +1,5 @@
 package com.example.mobilewallpaper.ui.detail_wallpaper
 
-var WALLPAPER_URL : String = ""
+import com.example.mobilewallpaper.model.Wallpaper
+
+var WALLPAPER : Wallpaper = Wallpaper(url = "")

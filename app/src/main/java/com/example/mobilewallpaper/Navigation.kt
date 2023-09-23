@@ -1,7 +1,6 @@
 package com.example.mobilewallpaper
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,6 +10,7 @@ import com.example.mobilewallpaper.ui.Screen
 import com.example.mobilewallpaper.ui.category_wallpaper.CategoriesWallpaperScreen
 import com.example.mobilewallpaper.ui.detail_wallpaper.DetailWallpaperScreen
 import com.example.mobilewallpaper.ui.list_wallpaper.ListWallpaperScreen
+import com.example.mobilewallpaper.ui.setting.SettingsScreen
 
 @Composable
 fun Navigation() {
@@ -51,6 +51,12 @@ fun Navigation() {
         ) {
             val result = it.arguments?.getString("favorite") ?: ""
             ListWallpaperScreen(navController = navController, category = result)
+        }
+
+        composable(
+            route = Screen.SettingsScreen.route
+        ) {
+            SettingsScreen(navController = navController)
         }
     }
 }

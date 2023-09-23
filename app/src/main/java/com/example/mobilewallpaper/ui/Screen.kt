@@ -5,4 +5,5 @@ sealed class Screen(val route: String) {
     data object ListWallpaper : Screen("list_wallpaper")
     data object DetailWallpaper : Screen("detail_wallpaper")
     data object FavoriteScreen : Screen("favorite_screen")
+    data object SettingsScreen : Screen("settings_screen")
 }

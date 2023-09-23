@@ -11,7 +11,11 @@ sealed class BottomItem(val route: String, val icon: Int) {
     )
     data object FavoriteScreen: BottomItem(
         route = Screen.FavoriteScreen.route,
-        icon = R.drawable.bookmark
+        icon = R.drawable.favorite_border
 
+    )
+    data object SettingsScreen: BottomItem(
+        route = Screen.SettingsScreen.route,
+        icon = R.drawable.settings
     )
 }

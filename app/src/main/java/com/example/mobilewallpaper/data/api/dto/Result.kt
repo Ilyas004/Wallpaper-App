@@ -19,8 +19,9 @@ data class Result(
     val width: Int
 )
 
-fun Result.toWallpaper(result: Result): Wallpaper {
+fun Result.toWallpaper(): Wallpaper {
     return Wallpaper(
-        url = result.links.download
+        url = links.download,
+        idString = id
     )
 }

@@ -1,10 +1,14 @@
 package com.example.mobilewallpaper.ui.bottom_bar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
@@ -17,12 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.mobilewallpaper.ui.Screen
+import com.example.mobilewallpaper.util.Constant
 
 @Composable
 fun BottomBar(navController: NavController) {
     val listItems = listOf(
         BottomItem.CategoryScreen,
-        BottomItem.FavoriteScreen
+        BottomItem.FavoriteScreen,
+        BottomItem.SettingsScreen,
     )
 
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -33,10 +39,9 @@ fun BottomBar(navController: NavController) {
             .fillMaxHeight(),
         verticalArrangement = Arrangement.Bottom
     ) {
+        Divider(color = MaterialTheme.colorScheme.primary)
         NavigationBar(
-            containerColor = White,
-            modifier = Modifier
-                .border(0.5.dp, color = Color.Black),
+            containerColor = MaterialTheme.colorScheme.background,
             tonalElevation = 8.dp
         ) {
             listItems.forEach { item ->
@@ -51,13 +56,20 @@ fun BottomBar(navController: NavController) {
                             }
 
                             Screen.FavoriteScreen.route -> {
-                                navController.navigate(item.route + "/favorite") {
+                                navController.navigate(item.route + "/${Constant.FAVORITE}") {
                                     popUpTo(item.route) {
                                         inclusive = true
                                     }
                                 }
                             }
-                            else -> {}
+
+                            Screen.SettingsScreen.route -> {
+                                navController.navigate(item.route) {
+                                    popUpTo(item.route) {
+                                        inclusive = true
+                                    }
+                                }
+                            }
 
                         }
                     },
